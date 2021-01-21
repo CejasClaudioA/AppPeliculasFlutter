@@ -7,7 +7,6 @@ class PeliculaDetalle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Pelicula pelicula = ModalRoute.of(context).settings.arguments;
-    print(pelicula.id);
 
     return SafeArea(
       child: Scaffold(
@@ -60,7 +59,7 @@ class PeliculaDetalle extends StatelessWidget {
       child: Row(
         children: [
           Hero(
-            tag: pelicula.id,
+            tag: pelicula.uniqueId,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: Image(
@@ -92,9 +91,19 @@ class PeliculaDetalle extends StatelessWidget {
                     Text(
                       pelicula.voteAverage.toString(),
                       style: Theme.of(context).textTheme.subtitle1,
-                    )
+                    ),
                   ],
-                )
+                ),
+                Text("Estreno:", style: Theme.of(context).textTheme.bodyText1),
+                Row(
+                  children: [
+                    Icon(Icons.event),
+                    Text(
+                      _formateaFecha(pelicula.releaseDate.toString()),
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                  ],
+                ),
               ],
             ),
           )
@@ -163,5 +172,12 @@ class PeliculaDetalle extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _formateaFecha(String _dirtyFecha) {
+    String _soloFecha = _dirtyFecha.split(" ")[0];
+    List _listaFecha = _soloFecha.split("-");
+
+    return '${_listaFecha[2]}-${_listaFecha[1]}-${_listaFecha[0]}';
   }
 }

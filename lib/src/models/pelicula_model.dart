@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
-
 class Peliculas {
   List<Pelicula> listaPeliculas = new List();
 
@@ -18,6 +14,8 @@ class Peliculas {
 }
 
 class Pelicula {
+  String uniqueId;
+
   int voteCount;
   int id;
   bool video;
